@@ -1,4 +1,4 @@
-import SideNav from "../ui/dashboard/sidenav";
+import SideNav from "../ui/gamelist.tsx/sidenav";
 
 export default function Layout({children}: {children: React.ReactNode}) {
     return (

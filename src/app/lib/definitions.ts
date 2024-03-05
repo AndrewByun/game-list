@@ -1,8 +1,8 @@
 export type Game = {
-    ID: number,
-    Name: string,
-    Slug: string,
-    DateModified: string,
+    id: number,
+    name: string,
+    slug: string,
+    dateModified: string,
     Assets: Array<{
         Id: number,
         GameId: number,

@@ -1,3 +1,10 @@
+import GamesPreview from "@/app/ui/gamelist.tsx/gamespreview"
+
 export default function Page(){
-    return <p>Gamelist Page</p>
+    return (
+        <div>
+    <p></p>
+    <GamesPreview/>
+    </div>
+    )
 }
