@@ -84,7 +84,7 @@ export default async function GamesTable({
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
                       <Image
-                        src={`/gameIcons/${game.id}`}
+                        src={`/gameIcons/${game.id}.png`}
                         className="rounded-full"
                         width={28}
                         height={28}

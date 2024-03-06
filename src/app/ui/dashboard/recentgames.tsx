@@ -2,6 +2,7 @@ import { fetchGames } from "@/app/lib/data"
 import {rubik} from '../fonts';
 import { Game } from "@/app/lib/definitions";
 import Image from "next/image";
+
 export default async function RecentGames () {
    const latestGames = await fetchGames();
    console.log(`logging from inside GamesPreview component`);

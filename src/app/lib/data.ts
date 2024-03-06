@@ -7,7 +7,7 @@ export async function fetchGames() {
   try {
     const result = await db.query(`
         SELECT * FROM games
-        ORDER BY GameOrder
+        ORDER BY Name
         LIMIT 5
         `);
     // console.log(`this is result:`)
@@ -46,7 +46,8 @@ const ITEMS_PER_PAGE = 12
 
 export async function fetchFilteredGames(query: string, currentPage: number){
   noStore();
-
+  console.log(`this is current page: `)
+  console.log(currentPage);
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   console.log(`Query Parameter: ${query}`);
 
@@ -63,10 +64,10 @@ export async function fetchFilteredGames(query: string, currentPage: number){
     FROM games
     WHERE
       games.Name ILIKE '%' || $1 || '%' OR
-      games.Slug ILIKE '%' || $2 || '%' 
-    ORDER BY GameOrder
+      games.Slug ILIKE '%' || $1 || '%' 
+    ORDER BY Name
     LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
-    `, [query, query])
+    `, [query])
     console.log(`query results`, games)
     return games.rows
   } catch(error){
@@ -83,8 +84,8 @@ export async function fetchGamesPages(query: string) {
     FROM games
     WHERE
     games.Name ILIKE '%' || $1 || '%' OR
-    games.Slug ILIKE '%' || $2 || '%' 
-    `, [query, query]);
+    games.Slug ILIKE '%' || $1 || '%' 
+    `, [query]);
     
     console.log(`this is count: `, count)
     const totalPages = Math.ceil(count.rows[0].count / ITEMS_PER_PAGE)
