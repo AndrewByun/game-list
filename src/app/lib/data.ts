@@ -42,7 +42,7 @@ export async function fetchCardData() {
     throw error;
   }
 }
-const ITEMS_PER_PAGE = 6
+const ITEMS_PER_PAGE = 12
 
 export async function fetchFilteredGames(query: string, currentPage: number){
   noStore();
@@ -79,13 +79,13 @@ export async function fetchGamesPages(query: string) {
   noStore();
   try {
     const count = await db.query(`
-    SELECT * FROM games
-    WHERE 
-      games.Name ILIKE '%' || $1 || '%' OR
-      games.Slug ILIKE '%' || $2 || '%' 
-    ORDER BY GameOrder
-    LIMIT 5
-    `, [query, query])
+    SELECT COUNT(*)
+    FROM games
+    WHERE
+    games.Name ILIKE '%' || $1 || '%' OR
+    games.Slug ILIKE '%' || $2 || '%' 
+    `, [query, query]);
+    
     console.log(`this is count: `, count)
     const totalPages = Math.ceil(count.rows[0].count / ITEMS_PER_PAGE)
     return totalPages;
