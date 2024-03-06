@@ -36,7 +36,7 @@ export default async function GamesTable({
                       />
                       <p>{game.name}</p>
                     </div>
-                    <p className="text-sm text-gray-500">{game.email}</p>
+                    {/* <p className="text-sm text-gray-500">{game.email}</p> */}
                   </div>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
@@ -76,7 +76,7 @@ export default async function GamesTable({
               </tr>
             </thead>
             <tbody className="bg-white">
-              {games?.map((game) => (
+              {games?.map((game: Game) => (
                 <tr
                   key={game.id}
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
@@ -94,7 +94,7 @@ export default async function GamesTable({
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {game.email}
+                    {/* {game.email} */}
                   </td>
                   {/* <td className="whitespace-nowrap px-3 py-3">
                     {formatCurrency(game.amount)}
