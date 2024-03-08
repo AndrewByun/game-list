@@ -20,11 +20,6 @@ const links = [
     href: '/dashboard/gamelist',
     icon: ListBulletIcon,
   },
-  {
-    name: 'Search',
-    href: '/dashboard/search',
-    icon: MagnifyingGlassIcon,
-  },
 ];
 
 export default function NavLinks() {

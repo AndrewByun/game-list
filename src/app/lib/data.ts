@@ -2,6 +2,7 @@ const db = require('./db');
 import { Game } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
+//fetches games for the dashboard home page
 export async function fetchGames() {
   noStore();
   try {
@@ -23,6 +24,7 @@ export async function fetchGames() {
   }
 }
 
+//fetches number of games in the list for the dashboard home page
 export async function fetchCardData() {
   noStore();
   try {
@@ -42,14 +44,14 @@ export async function fetchCardData() {
     throw error;
   }
 }
-const ITEMS_PER_PAGE = 12
 
+const ITEMS_PER_PAGE = 12
+//fetch games based on search query, 12 items at a time
 export async function fetchFilteredGames(query: string, currentPage: number){
   noStore();
-  console.log(`this is current page: `)
-  console.log(currentPage);
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   console.log(`Query Parameter: ${query}`);
+  console.log(`we are in fetch filtered games`)
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
     const games = await db.query(`
@@ -68,7 +70,7 @@ export async function fetchFilteredGames(query: string, currentPage: number){
     ORDER BY Name
     LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `, [query])
-    console.log(`query results`, games)
+    console.log(`query results`, games.rows)
     return games.rows
   } catch(error){
     console.error('Database Error:', error);
@@ -76,8 +78,11 @@ export async function fetchFilteredGames(query: string, currentPage: number){
   }
 }
 
+//fetches the number of games in our db, then determines the number of pages we need to display based on the number of items we display per page
 export async function fetchGamesPages(query: string) {
   noStore();
+  console.log(`we are in fetch games pages`)
+
   try {
     const count = await db.query(`
     SELECT COUNT(*)
@@ -87,11 +92,30 @@ export async function fetchGamesPages(query: string) {
     games.Slug ILIKE '%' || $1 || '%' 
     `, [query]);
     
-    console.log(`this is count: `, count)
+    console.log(`this is count: `, count.rows)
     const totalPages = Math.ceil(count.rows[0].count / ITEMS_PER_PAGE)
     return totalPages;
   } catch(error){
     console.error('Database Error:', error);
     throw new Error('Failed to fetch total number of games.');
+  }
+}
+
+export async function fetchGameDetails (gameId : any){
+  noStore();
+  console.log(`we are in fetch game details for modal`);
+  try {
+    const modalDetails = await db.query(`
+    SELECT *
+    FROM games
+    WHERE
+    id = $1
+    `, [gameId])
+    console.log(`this is modal details`, modalDetails.rows);
+    return modalDetails.rows
+  } catch(error){
+    console.error('Error fetching modal details');
+    throw new Error('Failed to fetch modal details');
+
   }
 }

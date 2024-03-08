@@ -6,7 +6,7 @@ import Image from "next/image";
 export default async function RecentGames () {
    const latestGames = await fetchGames();
    console.log(`logging from inside GamesPreview component`);
-   console.log(latestGames)
+//    console.log(latestGames)
    return (
     <div className="flex w-full flex-col md:col-span-4">
             <h2 className={`${rubik.className} mb-4 text-xl md:text-2xl`}>Games</h2>
