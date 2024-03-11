@@ -3,6 +3,7 @@ export type Game = {
     name: string,
     slug: string,
     supportsaddons: boolean,
+    supportsvoice: boolean,
     dateModified: string,
     Assets: Array<{
         Id: number,

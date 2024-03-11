@@ -105,17 +105,16 @@ export async function fetchGameDetails (gameId : any){
   noStore();
   console.log(`we are in fetch game details for modal`);
   try {
-    const modalDetails = await db.query(`
+    const gameDetails = await db.query(`
     SELECT *
     FROM games
     WHERE
     id = $1
     `, [gameId])
-    console.log(`this is modal details`, modalDetails.rows);
-    return modalDetails.rows
+    console.log(`this is modal details`, gameDetails.rows);
+    return gameDetails.rows
   } catch(error){
     console.error('Error fetching modal details');
     throw new Error('Failed to fetch modal details');
-
   }
 }

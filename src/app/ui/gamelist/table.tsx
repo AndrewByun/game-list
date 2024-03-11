@@ -13,8 +13,17 @@ export default async function GamesTable({
   query: string;
   currentPage: number;
 }) {
-  const params = new URLSearchParams();
+
   const games = await fetchFilteredGames(query, currentPage);
+
+  // const searchParams = useSearchParams();
+  // const pathName = usePathname();
+  // const { replace } = useRouter();
+  // const handleClick = () => {
+  //   const params = new URLSearchParams(searchParams);
+  //   params.set('page', '1');
+  //   replace(`${pathName}?${params.toString()}`);
+  // }
   // console.log(`Games: `, games)
   return (
     <div className='mt-6 flow-root'>
@@ -24,7 +33,12 @@ export default async function GamesTable({
             <div className='overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0'>
               <div className='md:hidden'>
                 {games?.map((game: Game) => (
-                 
+                 <Link
+                 key={game.id}
+                 href={`/dashboard/gamelist/[id]`}
+                 as={`/dashboard/gamelist/${game.id}`}
+                //  onClick={handleClick}
+                 >
                   <div
                   key={game.id}
                   className='mb-2 w-full rounded-md bg-white p-4'
@@ -54,6 +68,8 @@ export default async function GamesTable({
                       <div className='flex justify-end gap-2'></div>
                     </div>
                   </div>
+                  </Link>
+
                 ))}
               </div>
             </div>
@@ -82,6 +98,7 @@ export default async function GamesTable({
               </thead>
               <tbody className='bg-white'>
                 {games?.map((game: Game) => (
+                  // <Link key = {game.id} href = {{pathname: `/dashboard/gamelist/${game.id}`, query: {querydata: game}}}>
                     <tr
                       key={game.id}
                       className='w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg'
@@ -112,6 +129,7 @@ export default async function GamesTable({
                         <div className='flex justify-end gap-3'></div>
                       </td>
                     </tr>
+                    // </Link>
                 ))}
               </tbody>
             </table>
