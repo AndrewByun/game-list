@@ -1,5 +1,5 @@
-import { CardSkeleton } from "../../ui/skeletons";
+import DashboardSkeleton, { CardsSkeleton } from "../../ui/skeletons";
 
 export default function Loading() {
-    return <CardSkeleton/>
+    return <DashboardSkeleton/>
   }

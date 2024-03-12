@@ -3,7 +3,8 @@ import Search from "@/app/ui/gamelist/search";
 import GamesTable from "@/app/ui/gamelist/table";
 import { rubik } from "@/app/ui/fonts";
 import { fetchGamesPages } from "@/app/lib/data";
-
+import { GamesTableSkeleton } from "@/app/ui/skeletons";
+import { Suspense } from "react";
 export default async function Page({
   searchParams,
 }: {
@@ -26,9 +27,9 @@ export default async function Page({
       <Search placeholder="Search games by name or slug..." />
       {/* <CreateInvoice /> */}
     </div>
-     {/* <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}> */}
+     <Suspense key={query + currentPage} fallback={<GamesTableSkeleton />}>
       <GamesTable query={query} currentPage={currentPage} />
-    {/* </Suspense> */}
+    </Suspense>
     <div className="mt-5 flex w-full justify-center">
       <Pagination totalPages={totalPages} />
     </div>
