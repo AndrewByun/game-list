@@ -8,7 +8,7 @@ const iconMap = {
 
 export default async function CardWrapper() {
   const numberOfGames = await fetchTotalGames();
-  const gamesSupportAddons = await fetchGamesSupportAddOn();
+  const {gamesSupportAddons, gamesSupportVoice} = await fetchGamesSupportAddOn(); 
   //   console.log(numberOfGames)
   return (
     <>
@@ -16,6 +16,11 @@ export default async function CardWrapper() {
       <Card
         title='Games That Support Addons'
         value={gamesSupportAddons}
+        type='games'
+      />
+            <Card
+        title='Games That Support Voice'
+        value={gamesSupportVoice}
         type='games'
       />
     </>
@@ -33,7 +38,7 @@ export function Card({
 }) {
   const Icon = iconMap[type];
   return (
-    <div className='rounded-xl bg-gray-100 p-2 shadow-sm'>
+    <div className='rounded-xl bg-gray-50 p-2 shadow-sm'>
       <div className='flex p-4'>
         {Icon ? <Icon className='h-5 w-5 text-gray-700' /> : null}
         <h3 className={`${rubik.className} ml-2 text-sm`}>{title}</h3>
