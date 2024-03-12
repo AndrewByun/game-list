@@ -23,7 +23,7 @@ export default async function Page({
       <h1 className={`${rubik.className} text-2xl`}>Games</h1>
     </div>
     <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-      <Search placeholder="Search games..." />
+      <Search placeholder="Search games by name or slug..." />
       {/* <CreateInvoice /> */}
     </div>
      {/* <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}> */}

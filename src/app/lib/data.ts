@@ -8,10 +8,10 @@ export async function fetchGames() {
   try {
     const result = await db.query(`
         SELECT * FROM games
-        ORDER BY Name
+        ORDER BY GameOrder, Name
         LIMIT 5
         `);
-    // console.log(`this is result:`)
+    console.log(`we are in fetch games, this is result:`)
     // console.log(result);
     const latestGames = result.rows.map((game: Game) => ({
       name: game.name,
@@ -25,18 +25,18 @@ export async function fetchGames() {
 }
 
 //fetches number of games in the list for the dashboard home page
-export async function fetchCardData() {
+export async function fetchTotalGames() {
   noStore();
   try {
-    // console.log(`hit fetchCardData`)
+    // console.log(`hit fetchTotalGames`)
     const gameCountPromise = db.query(`
-    SELECT COUNT(*) FROM games
+    SELECT COUNT (*) FROM games
     `);
 
     const [gameCountResult] = await Promise.all([gameCountPromise]);
 
     const numberOfGames = Number(gameCountResult.rows[0].count);
-    console.log(`this is number of games`, numberOfGames);
+    // console.log(`this is number of games`, numberOfGames);
     return numberOfGames;
   } catch (error) {
     console.error(`Error trying to fetch number of games: `, error);
@@ -45,11 +45,32 @@ export async function fetchCardData() {
   }
 }
 
+
+export async function fetchGamesSupportAddOn () {
+  noStore();
+  try {
+    const fetchGamesAddOns = await db.query(`
+    SELECT COUNT (*) 
+    FROM games
+    WHERE
+    SupportsAddons = true;
+    `)
+    const gamesSupportAddons = fetchGamesAddOns.rows[0].count;
+    console.log(gamesSupportAddons)
+    return gamesSupportAddons;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch total of games that support add ons')
+  }
+}
+
+
 const ITEMS_PER_PAGE = 12
+
 //fetch games based on search query, 12 items at a time
 export async function fetchFilteredGames(query: string, currentPage: number){
   noStore();
-  console.log(`Query Parameter: ${query}`);
+  // console.log(`Query Parameter: ${query}`);
   console.log(`we are in fetch filtered games`)
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
@@ -67,7 +88,7 @@ export async function fetchFilteredGames(query: string, currentPage: number){
     WHERE
       games.Name ILIKE '%' || $1 || '%' OR
       games.Slug ILIKE '%' || $1 || '%' 
-    ORDER BY Name
+    ORDER BY GameOrder, Name
     LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `, [query])
     console.log(`query results`, games.rows)
@@ -81,7 +102,7 @@ export async function fetchFilteredGames(query: string, currentPage: number){
 //fetches the number of games in our db, then determines the number of pages we need to display based on the number of items we display per page
 export async function fetchGamesPages(query: string) {
   noStore();
-  console.log(`we are in fetch games pages`)
+  console.log(`we are in fetch games pages for gameslist tab`)
 
   try {
     const count = await db.query(`
@@ -92,7 +113,7 @@ export async function fetchGamesPages(query: string) {
     games.Slug ILIKE '%' || $1 || '%' 
     `, [query]);
     
-    console.log(`this is count: `, count.rows)
+    // console.log(`this is count: `, count.rows)
     const totalPages = Math.ceil(count.rows[0].count / ITEMS_PER_PAGE)
     return totalPages;
   } catch(error){
@@ -106,12 +127,12 @@ export async function fetchGameDetails (gameId : any){
   console.log(`we are in fetch game details for modal`);
   try {
     const gameDetails = await db.query(`
-    SELECT *
+    SELECT (*)
     FROM games
     WHERE
     id = $1
     `, [gameId])
-    console.log(`this is modal details`, gameDetails.rows);
+    // console.log(`this is modal details`, gameDetails.rows);
     return gameDetails.rows
   } catch(error){
     console.error('Error fetching modal details');
