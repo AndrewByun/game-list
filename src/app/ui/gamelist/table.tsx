@@ -1,5 +1,5 @@
 import Image from 'next/image';
-// import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
+import { ViewDetails } from './buttons';
 // import InvoiceStatus from '@/app/ui/invoices/status';
 // import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredGames } from '@/app/lib/data';
@@ -33,12 +33,12 @@ export default async function GamesTable({
             <div className='overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0'>
               <div className='md:hidden'>
                 {games?.map((game: Game) => (
-                 <Link
-                 key={game.id}
-                 href={`/dashboard/gamelist/[id]`}
-                 as={`/dashboard/gamelist/${game.id}`}
+                //  <Link
+                //  key={game.id}
+                //  href={`/dashboard/gamelist/[id]`}
+                //  as={`/dashboard/gamelist/${game.id}`}
                 //  onClick={handleClick}
-                 >
+                //  >
                   <div
                   key={game.id}
                   className='mb-2 w-full rounded-md bg-white p-4'
@@ -66,9 +66,10 @@ export default async function GamesTable({
                         {/* <p>{formatDateToLocal(game.date)}</p> */}
                       </div>
                       <div className='flex justify-end gap-2'></div>
+                      <ViewDetails id={game.id} />
                     </div>
                   </div>
-                  </Link>
+                  // </Link>
 
                 ))}
               </div>
@@ -85,12 +86,13 @@ export default async function GamesTable({
                   <th scope='col' className='px-3 py-5 font-medium'>
                     Supports Voice
                   </th>
+                  
                   {/* <th scope='col' className='px-3 py-5 font-medium'>
                     game order
                   </th> */}
-                  {/* <th scope='col' className='relative py-3 pl-6 pr-3'>
+                  <th scope='col' className='relative py-3 pl-6 pr-3'>
                     <span className='sr-only'>Edit</span>
-                  </th> */}
+                  </th>
                 </tr>
               </thead>
               <tbody className='bg-white'>
@@ -118,6 +120,11 @@ export default async function GamesTable({
                       <td className='whitespace-nowrap px-3 py-3'>
                         {game.supportsvoice ? 'Yes' : 'No'}
                       </td>
+                      <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                    <div className="flex justify-end gap-3">
+                      <ViewDetails id={game.id} />
+                    </div>
+                    </td>
                       {/* <td className='whitespace-nowrap px-3 py-3'>
                         {game.gameorder}
                       </td> */}

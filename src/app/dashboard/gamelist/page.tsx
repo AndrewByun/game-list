@@ -13,6 +13,7 @@ export default async function Page({
     page?: string;
   };
 }) {
+  //we can access the searchParams from the Search component because Search is a child component of this Page component
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
 

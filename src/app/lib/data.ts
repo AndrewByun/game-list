@@ -48,19 +48,18 @@ export async function fetchTotalGames() {
 export async function fetchGamesSupportAddOn() {
   noStore();
   try {
-
     const [addOnsResult, voiceResult] = await Promise.all([
-      db.query(`SELECT COUNT (*) FROM games WHERE SupportsAddons = true`), db.query(`SELECT COUNT (*) FROM games WHERE SupportsVoice = true`)
-    ])
+      db.query(`SELECT COUNT (*) FROM games WHERE SupportsAddons = true`),
+      db.query(`SELECT COUNT (*) FROM games WHERE SupportsVoice = true`),
+    ]);
 
-    
     const gamesSupportAddons = addOnsResult.rows[0].count;
     const gamesSupportVoice = voiceResult.rows[0].count;
     console.log(gamesSupportAddons);
     return {
       gamesSupportAddons,
-      gamesSupportVoice
-    }
+      gamesSupportVoice,
+    };
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch data for cards');
@@ -136,15 +135,17 @@ export async function fetchGameDetails(gameId: any) {
   try {
     const gameDetails = await db.query(
       `
-    SELECT (*)
+    SELECT *
     FROM games
     WHERE
     id = $1
     `,
       [gameId]
     );
-    // console.log(`this is modal details`, gameDetails.rows);
-    return gameDetails.rows;
+    console.log(`this is modal details`, gameDetails.rows[0]);
+
+
+    return gameDetails.rows[0];
   } catch (error) {
     console.error('Error fetching modal details');
     throw new Error('Failed to fetch modal details');
