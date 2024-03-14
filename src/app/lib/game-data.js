@@ -1,3 +1,12 @@
+const users = [
+  {
+  id: '410544b2-4001-4271-9855-fec4b6a6442a',
+  name: 'User',
+  email: 'user@nextmail.com',
+  password: '123456',
+}
+]
+
 const gamedata = [
           {
             "ID": 1,
@@ -19614,4 +19623,5 @@ const gamedata = [
       
 module.exports = {
   gamedata,
+  users
 }
