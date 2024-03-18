@@ -95,7 +95,7 @@ export async function fetchFilteredGames(query: string, currentPage: number) {
     `,
       [query]
     );
-    console.log(`query results`, games.rows);
+    // console.log(`query results`, games.rows);
     return games.rows;
   } catch (error) {
     console.error('Database Error:', error);

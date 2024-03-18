@@ -10,6 +10,7 @@ export async function authenticate(
   formData: FormData,
 ) {
   try {
+    console.log('we are in authenticate from actions')
     await signIn('credentials', formData);
   } catch (error) {
     if (error instanceof AuthError) {

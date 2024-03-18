@@ -10,10 +10,11 @@ import { default as db } from './src/app/lib/db';
 
 async function getUser(email: string): Promise<User | undefined> {
   try {
+    console.log(`this is the user email for sign in from getUser call`)
     console.log(email)
     const user = await db.query(`SELECT * FROM users WHERE email = $1`, [email]);
-    console.log(`this is what returned from the query `);
-    console.log(user.rows[0]);
+    // console.log(`this is what returned from the query `);
+    // console.log(user.rows[0]);
     return user.rows[0];
   } catch (error) {
     console.error('Failed to fetch user:', error);
@@ -36,7 +37,12 @@ export const { auth, signIn, signOut } = NextAuth({
           const { email, password } = parsedCredentials.data;
           const user = await getUser(email);
           if (!user) return null;
+          // console.log(auth)
+          console.log('this is user logging from authorize callback for signin')
+          // console.log(user);
           const passwordsMatch = await bcrypt.compare(password, user.password);
+          console.log('this is passwordsMatch');
+          console.log(passwordsMatch)
           if (passwordsMatch) return user;
         }
         console.log('Invalid credentials');
