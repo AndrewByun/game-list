@@ -1,5 +1,5 @@
-import { fetchGameDetails } from '@/app/lib/data';
-import { Game } from '@/app/lib/definitions';
+import { fetchGameDetails } from '../../../../lib/data';
+import { Game } from '../../../../lib/definitions';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';

@@ -1,7 +1,7 @@
 
 
-const db = require('../src/app/lib/db.js');
-const {gamedata, users} = require('../src/app/lib/game-data.js');
+const db = require('../app/lib/db.js');
+const {gamedata, users} = require('../app/lib/game-data.js');
 const bcrypt = require('bcrypt');
 
 

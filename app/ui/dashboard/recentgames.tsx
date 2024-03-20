@@ -1,6 +1,6 @@
-import { fetchGames } from "@/app/lib/data"
+import { fetchGames } from "../../lib/data"
 import {rubik} from '../fonts';
-import { Game } from "@/app/lib/definitions";
+import { Game } from "../../lib/definitions";
 import Image from "next/image";
 
 export default async function RecentGames () {

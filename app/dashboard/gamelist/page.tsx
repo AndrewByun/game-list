@@ -1,9 +1,9 @@
-import Pagination from "@/app/ui/gamelist/pagination"
-import Search from "@/app/ui/gamelist/search";
-import GamesTable from "@/app/ui/gamelist/table";
-import { rubik } from "@/app/ui/fonts";
-import { fetchGamesPages } from "@/app/lib/data";
-import { GamesTableSkeleton } from "@/app/ui/skeletons";
+import Pagination from "../../ui/gamelist/pagination"
+import Search from "../../ui/gamelist/search";
+import GamesTable from "../../ui/gamelist/table";
+import { rubik } from "../../ui/fonts";
+import { fetchGamesPages } from "../../lib/data";
+import { GamesTableSkeleton } from "../../ui/skeletons";
 import { Suspense } from "react";
 export default async function Page({
   searchParams,

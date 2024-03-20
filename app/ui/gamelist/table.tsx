@@ -2,8 +2,8 @@ import Image from 'next/image';
 import { ViewDetails } from './buttons';
 // import InvoiceStatus from '@/app/ui/invoices/status';
 // import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
-import { fetchFilteredGames } from '@/app/lib/data';
-import { Game } from '@/app/lib/definitions';
+import { fetchFilteredGames } from '../../lib/data';
+import { Game } from '../../lib/definitions';
 import Link from 'next/link';
 
 export default async function GamesTable({

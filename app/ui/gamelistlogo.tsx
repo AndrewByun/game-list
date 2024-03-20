@@ -1,5 +1,5 @@
 
-import { rubik } from '@/app/ui/fonts';
+import { rubik } from './fonts';
 
 export default function Gamelistlogo() {
   return (

@@ -1,8 +1,8 @@
 import CardWrapper from "../../ui/dashboard/cards"
-import RecentGames from "@/app/ui/dashboard/recentgames"
-import { rubik } from "@/app/ui/fonts"
+import RecentGames from "../../ui/dashboard/recentgames"
+import { rubik } from "../../ui/fonts"
 import { Suspense } from "react"
-import { CardsSkeleton, GamesPreviewSkeleton } from "@/app/ui/skeletons"
+import { CardsSkeleton, GamesPreviewSkeleton } from "../../ui/skeletons"
 export default function Page(){
     return (
         <div>

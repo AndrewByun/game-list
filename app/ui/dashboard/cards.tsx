@@ -1,6 +1,6 @@
 import { ListBulletIcon } from '@heroicons/react/24/outline';
 import { rubik } from '../fonts';
-import { fetchGamesSupportAddOn, fetchTotalGames } from '@/app/lib/data';
+import { fetchGamesSupportAddOn, fetchTotalGames } from '../../lib/data';
 
 const iconMap = {
   games: ListBulletIcon,
