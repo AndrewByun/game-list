@@ -4,7 +4,6 @@ import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
-
 import { default as db } from './src/app/lib/db';
 
 
@@ -28,6 +27,8 @@ export const { auth, signIn, signOut } = NextAuth({
     Credentials({
       //this function handles the sign in logic, we use zod to validate the email and password before checking if the user exists in the database
       async authorize(credentials) {
+        console.log(authConfig)
+        console.log(auth)
         const parsedCredentials = z
           .object({ email: z.string().email(), password: z.string().min(6) })
           .safeParse(credentials);
@@ -37,7 +38,6 @@ export const { auth, signIn, signOut } = NextAuth({
           const { email, password } = parsedCredentials.data;
           const user = await getUser(email);
           if (!user) return null;
-          // console.log(auth)
           console.log('this is user logging from authorize callback for signin')
           // console.log(user);
           const passwordsMatch = await bcrypt.compare(password, user.password);
@@ -46,7 +46,6 @@ export const { auth, signIn, signOut } = NextAuth({
           if (passwordsMatch) return user;
         }
         console.log('Invalid credentials');
-
         return null;
       },
     }),
