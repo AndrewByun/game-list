@@ -9,7 +9,7 @@ const iconMap = {
 export default async function CardWrapper() {
   const numberOfGames = await fetchTotalGames();
   const {gamesSupportAddons, gamesSupportVoice} = await fetchGamesSupportAddOn(); 
-  //   console.log(numberOfGames)
+
   return (
     <>
       <Card title='Total Games' value={numberOfGames} type='games' />

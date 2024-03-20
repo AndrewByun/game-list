@@ -16,15 +16,6 @@ export default async function GamesTable({
 
   const games = await fetchFilteredGames(query, currentPage);
 
-  // const searchParams = useSearchParams();
-  // const pathName = usePathname();
-  // const { replace } = useRouter();
-  // const handleClick = () => {
-  //   const params = new URLSearchParams(searchParams);
-  //   params.set('page', '1');
-  //   replace(`${pathName}?${params.toString()}`);
-  // }
-  // console.log(`Games: `, games)
   return (
     <div className='mt-6 flow-root'>
       <div className='overflow-x-auto'>
@@ -33,12 +24,6 @@ export default async function GamesTable({
             <div className='overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0'>
               <div className='md:hidden'>
                 {games?.map((game: Game) => (
-                //  <Link
-                //  key={game.id}
-                //  href={`/dashboard/gamelist/[id]`}
-                //  as={`/dashboard/gamelist/${game.id}`}
-                //  onClick={handleClick}
-                //  >
                   <div
                   key={game.id}
                   className='mb-2 w-full rounded-md bg-white p-4'
@@ -55,21 +40,15 @@ export default async function GamesTable({
                           />
                           <p>{game.name}</p>
                         </div>
-                        {/* <p className="text-sm text-gray-500">{game.email}</p> */}
                       </div>
                     </div>
                     <div className='flex w-full items-center justify-between pt-4'>
                       <div>
-                        {/* <p className="text-xl font-medium">
-                        {formatCurrency(game.amount)}
-                      </p> */}
-                        {/* <p>{formatDateToLocal(game.date)}</p> */}
                       </div>
                       <div className='flex justify-end gap-2'></div>
                       <ViewDetails id={game.id} />
                     </div>
                   </div>
-                  // </Link>
 
                 ))}
               </div>
@@ -86,18 +65,10 @@ export default async function GamesTable({
                   <th scope='col' className='px-3 py-5 font-medium'>
                     Supports Voice
                   </th>
-                  
-                  {/* <th scope='col' className='px-3 py-5 font-medium'>
-                    game order
-                  </th> */}
-                  <th scope='col' className='relative py-3 pl-6 pr-3'>
-                    <span className='sr-only'>Edit</span>
-                  </th>
                 </tr>
               </thead>
               <tbody className='bg-white'>
                 {games?.map((game: Game) => (
-                  // <Link key = {game.id} href = {{pathname: `/dashboard/gamelist/${game.id}`, query: {querydata: game}}}>
                     <tr
                       key={game.id}
                       className='w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg'
@@ -125,14 +96,7 @@ export default async function GamesTable({
                       <ViewDetails id={game.id} />
                     </div>
                     </td>
-                      {/* <td className='whitespace-nowrap px-3 py-3'>
-                        {game.gameorder}
-                      </td> */}
-                      {/* <td className='whitespace-nowrap py-3 pl-6 pr-3'>
-                        <div className='flex justify-end gap-3'></div>
-                      </td> */}
                     </tr>
-                    // </Link>
                 ))}
               </tbody>
             </table>

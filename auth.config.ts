@@ -6,10 +6,7 @@ export const authConfig = {
     },
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
-          console.log('we are in the callbacks for protected routes')
           const isLoggedIn = !!auth?.user;
-          console.log('we are logged in: ');
-          console.log(isLoggedIn);
           const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
           if (isOnDashboard) {
             if (isLoggedIn) return true;

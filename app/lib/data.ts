@@ -11,8 +11,6 @@ export async function fetchGames() {
         ORDER BY GameOrder, Name
         LIMIT 5
         `);
-    console.log(`we are in fetch games, this is result:`);
-    // console.log(result);
     const latestGames = result.rows.map((game: Game) => ({
       name: game.name,
       id: game.id,
@@ -28,7 +26,7 @@ export async function fetchGames() {
 export async function fetchTotalGames() {
   noStore();
   try {
-    // console.log(`hit fetchTotalGames`)
+
     const gameCountPromise = db.query(`
     SELECT COUNT (*) FROM games
     `);
@@ -36,7 +34,6 @@ export async function fetchTotalGames() {
     const [gameCountResult] = await Promise.all([gameCountPromise]);
 
     const numberOfGames = Number(gameCountResult.rows[0].count);
-    // console.log(`this is number of games`, numberOfGames);
     return numberOfGames;
   } catch (error) {
     console.error(`Error trying to fetch number of games: `, error);
@@ -55,7 +52,6 @@ export async function fetchGamesSupportAddOn() {
 
     const gamesSupportAddons = addOnsResult.rows[0].count;
     const gamesSupportVoice = voiceResult.rows[0].count;
-    console.log(gamesSupportAddons);
     return {
       gamesSupportAddons,
       gamesSupportVoice,
@@ -71,8 +67,6 @@ const ITEMS_PER_PAGE = 12;
 //fetch games based on search query, 12 items at a time
 export async function fetchFilteredGames(query: string, currentPage: number) {
   noStore();
-  // console.log(`Query Parameter: ${query}`);
-  console.log(`we are in fetch filtered games`);
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
@@ -95,7 +89,6 @@ export async function fetchFilteredGames(query: string, currentPage: number) {
     `,
       [query]
     );
-    // console.log(`query results`, games.rows);
     return games.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -106,7 +99,6 @@ export async function fetchFilteredGames(query: string, currentPage: number) {
 //fetches the number of games in our db, then determines the number of pages we need to display based on the number of items we display per page
 export async function fetchGamesPages(query: string) {
   noStore();
-  console.log(`we are in fetch games pages for gameslist tab`);
 
   try {
     const count = await db.query(
@@ -120,7 +112,6 @@ export async function fetchGamesPages(query: string) {
       [query]
     );
 
-    // console.log(`this is count: `, count.rows)
     const totalPages = Math.ceil(count.rows[0].count / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
@@ -131,7 +122,6 @@ export async function fetchGamesPages(query: string) {
 
 export async function fetchGameDetails(gameId: any) {
   noStore();
-  console.log(`we are in fetch game details for modal`);
   try {
     const gameDetails = await db.query(
       `
@@ -142,7 +132,7 @@ export async function fetchGameDetails(gameId: any) {
     `,
       [gameId]
     );
-    console.log(`this is modal details`, gameDetails.rows[0]);
+  
 
 
     return gameDetails.rows[0];
