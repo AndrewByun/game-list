@@ -19,16 +19,17 @@ jest.mock('../app/ui/gamelist/pagination', () => ({
 
 jest.mock('../app/lib/data', () => ({
   __esModule: true,
-  fetchGamesPages: jest.fn(() => Promise.resolve(10)),
+  fetchGamesPages: jest.fn().mockResolvedValue(10),
 }));
 
 describe('Gameslist Page should render a header and mock components', () => {
+  
   it('renders a header and child components', async () => {
-    render(<Page searchParams={{
-        query: '',
-        page: '1',
-    }}/>);
-
+    const mockSearchParams = {
+      query: 'mockQuery',
+      page: '1',
+    };
+    render(<Page searchParams={mockSearchParams}/>);
     expect(screen.getByText('Games')).toBeInTheDocument();
 
     expect(screen.getByTestId('mock-search')).toBeInTheDocument();

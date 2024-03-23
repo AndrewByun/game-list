@@ -5,7 +5,9 @@ import { rubik } from "../../ui/fonts";
 import { fetchGamesPages } from "../../lib/data";
 import { GamesTableSkeleton } from "../../ui/skeletons";
 import { Suspense } from "react";
+
 export default async function Page({
+  //nextjs page components accept the searchParams prop, an object that contains the search parameters of the current URL
   searchParams,
 }: {
   searchParams?: {
@@ -13,7 +15,7 @@ export default async function Page({
     page?: string;
   };
 }) {
-  //we can access the searchParams from the Search component because Search is a child component of this Page component
+
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
 
